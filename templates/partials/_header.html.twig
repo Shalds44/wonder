@@ -1,0 +1,43 @@
+<header class="header d-flex flex-row-nowrap justify-content-center p-20">
+    <div class="content flex-fill d-flex flexx-row-nowrap align-items-center justify-content-between">
+        <a class="header-logo" href="{{ path('home')}}">
+            <img src="{{ asset('build/images/img_quora/favicon-32x32.png') }}" alt="logo">
+        </a>
+        <div id="search" class="header-search p-10 flex-fill d-flex flex-row align-items-center">
+            <i class="fas fa-search mr-10"></i>
+            <input @input="updateInput" ref='input' type="text" class="flex-fill" name="" id="">
+            <img v-if="isLoading" src="{{ asset('build/images/loading.gif')}}" class="header-search-loading">
+            <ul class="header-search-result d-flex flex-column" v-if="questions?.length">
+                <a v-for="question in questions" :key="question.id" v-bind:href="'/question/' + question.id"> ${ question.title }$</a>
+            </ul>
+        </div>
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            <div class="d-flex flow-row-nowrap justify-content-center hide-xs">
+                <a href="{{path('current_user')}}">
+                    <img src="{{ app.user.picture}}" class="avatar-lg mr-10">
+                </a>
+                <small class="d-flex flex-column justify-content-center">
+                    <a href="{{path('logout')}}">Déconnexion</a>
+                </small>
+            </div>
+        {% else %}
+            <div class="hide-xs">
+                <a href="{{path('signup')}}"><button class="btn btn-primary mr-5">Inscription</button></a>
+                <a href="{{path('login')}}"><button class="btn btn-primary-stroke">Connexion</button></a>
+            </div>
+        {% endif %}
+        <div class="show-xs burger">
+            <i class="fas fa-bars"></i>
+        </div>
+    </div>
+</header>
+<div class="menu-xs d-flex flex-column hidden">
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            <a href="{{path('current_user')}}">Profil</a>
+            <a href="{{path('logout')}}">Déconnexion</a>
+        {% else %}
+            <a href="{{path('signup')}}"><button class="btn btn-primary mr-5">Inscription</button></a>
+            <a href="{{path('login')}}"><button class="btn btn-primary-stroke">Connexion</button></a>
+        {% endif %}
+</div>
+

@@ -1,0 +1,13 @@
+.question-tag {
+  background-color: var(--primary);
+  color: var(--color-primary);
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-semi-bold);
+  border-radius: var(--border-radius);
+  padding: 10px 5px;
+}
+
+small {
+  color: var(--gray);
+  opacity: 0.8;
+}
